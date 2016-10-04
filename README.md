@@ -93,7 +93,7 @@ Table of Contents
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  Problem Statement . . . . . . . . . . . . . . . . . . . . . .   4
    4.  Background  . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   5.  Aggressive Negative Caching . . . . . . . . . . . . . . . . .   5
+   5.  Aggressive Use Of Negative Caching  . . . . . . . . . . . . .   5
      5.1.  NSEC  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
      5.2.  NSEC3 . . . . . . . . . . . . . . . . . . . . . . . . . .   6
      5.3.  Wildcard  . . . . . . . . . . . . . . . . . . . . . . . .   6
@@ -137,9 +137,9 @@ Internet-Draft              NSEC/NSEC3 usage              September 2016
    if the name in question falls into a range expressed by a NSEC/NSEC3
    resource record already in the cache.
 
-   Aggressive Negative Caching was first proposed in Section 6 of DNSSEC
-   Lookaside Validation (DLV) [RFC5074] in order to find covering NSEC
-   records efficiently.
+   Aggressive Use Of Negative Caching was first proposed in Section 6 of
+   DNSSEC Lookaside Validation (DLV) [RFC5074] in order to find covering
+   NSEC records efficiently.
 
    Section 3 of [I-D.vixie-dnsext-resimprove] "Stopping Downward Cache
    Search on NXDOMAIN" and [I-D.ietf-dnsop-nxdomain-cut] proposed
@@ -245,7 +245,7 @@ Internet-Draft              NSEC/NSEC3 usage              September 2016
    authoritative statement of how quickly a name can start working
    within a zone.
 
-5.  Aggressive Negative Caching
+5.  Aggressive Use Of Negative Caching
 
    Section 4.5 of [RFC4035] shows that "In theory, a resolver could use
    wildcards or NSEC RRs to generate positive and negative responses
@@ -301,8 +301,8 @@ Internet-Draft              NSEC/NSEC3 usage              September 2016
 
 5.2.  NSEC3
 
-   NSEC3 aggressive negative caching is more difficult.  If the zone is
-   signed with NSEC3, the validating resolver needs to check the
+   NSEC3 aggressive use of negative caching is more difficult.  If the
+   zone is signed with NSEC3, the validating resolver needs to check the
    existence of non-terminals and wildcards which derive from query
    names.
 
@@ -482,7 +482,7 @@ Internet-Draft              NSEC/NSEC3 usage              September 2016
 
 10.  Implementation Status
 
-   Unbound supports aggressive negative caching.
+   Unbound supports aggressive use of negative caching.
 
 11.  Acknowledgments
 
@@ -660,11 +660,11 @@ Appendix A.  Detailed implementation notes
    o  Previously, cached negative responses were indexed by QNAME,
       QCLASS, QTYPE, and the setting of the CD bit (see RFC 4035,
       Section 4.7), and only queries matching the index key would be
-      answered from the cache.  With aggressive negative caching, the
-      validator, in addition to checking to see if the answer is in its
-      cache before sending a query, checks to see whether any cached and
-      validated NSEC record denies the existence of the sought
-      record(s).  Using aggressive negative caching, a validator will
+      answered from the cache.  With aggressive use of negative caching,
+      the validator, in addition to checking to see if the answer is in
+      its cache before sending a query, checks to see whether any cached
+      and validated NSEC record denies the existence of the sought
+      record(s).  Aggressive use of negative caching, a validator will
       not make queries for any name covered by a cached and validated
       NSEC record.  Furthermore, a validator answering queries from
       clients will synthesize a negative answer whenever it has an
@@ -679,20 +679,21 @@ Internet-Draft              NSEC/NSEC3 usage              September 2016
       applicable validated NSEC in its cache unless the CD bit was set
       on the incoming query.  (Imported from Section 6 of [RFC5074]).
 
-   o  Implementing aggressive negative caching suggests that a validator
-      will need to build an ordered data structure of NSEC and NSEC3
-      records for each signer domain name of NSEC / NSEC3 records in
-      order to efficiently find covering NSEC / NSEC3 records.  Call the
-      table as NSEC_TABLE.  (Imported from Section 6.1 of [RFC5074] and
-      expanded.)
+   o  Implementing aggressive use of negative caching suggests that a
+      validator will need to build an ordered data structure of NSEC and
+      NSEC3 records for each signer domain name of NSEC / NSEC3 records
+      in order to efficiently find covering NSEC / NSEC3 records.  Call
+      the table as NSEC_TABLE.  (Imported from Section 6.1 of [RFC5074]
+      and expanded.)
 
-   o  The aggressive negative caching may be inserted at the cache
-      lookup part of the recursive resolvers.
+   o  The aggressive use of negative caching may be inserted at the
+      cache lookup part of the recursive resolvers.
 
-   o  If errors happen in aggressive negative caching algorithm,
+   o  If errors happen in aggressive use of negative caching algorithm,
       resolvers MUST fall back to resolve the query as usual.  "Resolve
       the query as usual" means that the resolver must process the query
-      as though it does not implement aggressive negative caching.
+      as though it does not implement aggressive use of negative
+      caching.
 
 Authors' Addresses
 
@@ -723,7 +724,6 @@ Authors' Addresses
    US
 
    Email: warren@kumari.net
-
 
 
 
