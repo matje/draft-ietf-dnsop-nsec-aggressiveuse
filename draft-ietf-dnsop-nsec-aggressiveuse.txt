@@ -118,7 +118,7 @@ Internet-Draft              NSEC/NSEC3 usage                October 2016
    and recursive servers, and decreases privacy by leaking queries.
 
    This document updates RFC 4035 to allow recursive resolvers to use
-   NSEC/NSEC3 resource records to synthetize negative answers from the
+   NSEC/NSEC3 resource records to synthesize negative answers from the
    information they have in the cache.  This allows validating resolvers
    to respond with NXDOMAIN immediately if the name in question falls
    into a range expressed by a NSEC/NSEC3 resource record already in the
@@ -417,7 +417,7 @@ Internet-Draft              NSEC/NSEC3 usage                October 2016
 
 10.  Implementation Status
 
-   Unbound currenty implements aggressive negative caching, as does
+   Unbound currently implements aggressive negative caching, as does
    Google Public DNS.
 
 11.  Acknowledgments
@@ -571,8 +571,8 @@ Internet-Draft              NSEC/NSEC3 usage                October 2016
 13.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
-              RFC2119, March 1997,
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
    [RFC2308]  Andrews, M., "Negative Caching of DNS Queries (DNS
