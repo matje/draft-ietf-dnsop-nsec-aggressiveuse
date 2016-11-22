@@ -105,7 +105,7 @@ Table of Contents
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  13
      11.2.  Informative References . . . . . . . . . . . . . . . . .  14
    Appendix A.  Detailed implementation notes  . . . . . . . . . . .  14
-   Appendix B.  Procedure for determining ENT vs NXDOMAN . . . . . .  15
+   Appendix B.  Procedure for determining ENT vs NXDOMAN with NSEC .  15
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 
@@ -479,14 +479,18 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
    The authors gratefully acknowledge DLV [RFC5074] author Samuel Weiler
    and the Unbound developers.
 
+   Thanks to Mark Andrews for providing the helpful notes for
+   implementors provided in Appendix B.
+
    The authors would like to specifically thank Stephane Bortzmeyer (for
    standing next to and helping edit), Ralph Dolmans, Tony Finch, Tatuya
    JINMEI for extensive review and comments, and also Mark Andrews,
    Casey Deccio, Alexander Dupuy, Olafur Gudmundsson, Bob Harold, Shumon
    Huque, John Levine, Pieter Lexis, Matthijs Mekking (who even sent
-   pull requests!) and Ondrej Sury.  Mark Andrews also provided the text
-   (https://www.ietf.org/mail-archive/web/dnsop/current/msg18332.html)
-   which we made into Appendix B.
+   pull requests!) and Ondrej Sury.  Mark Andrews also provided the
+   helpful notes for implementors (https://www.ietf.org/mail-
+   archive/web/dnsop/current/msg18332.html) which we made into
+   Appendix B.
 
 10.1.  Change History
 
@@ -497,16 +501,16 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
    o  Moved some dangling text around - when the examples were added
       some text added in the wrong place.
 
-   o  There were some bits which mentioned "negative" in the title.
-
-   o  We had the cut-and-paste of what changed in 4035 twice.
-
 
 
 Fujiwara, et al.          Expires May 20, 2017                  [Page 9]
 
 Internet-Draft              NSEC/NSEC3 usage               November 2016
 
+
+   o  There were some bits which mentioned "negative" in the title.
+
+   o  We had the cut-and-paste of what changed in 4035 twice.
 
    -04 to -05:
 
@@ -552,10 +556,6 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
       query..." - which satisfies Jinmei's concern (which I was too
       dense to grock).
 
-   o  Fixup of the "validation required" in security considerations.
-
-   -02 to -03:
-
 
 
 
@@ -563,6 +563,10 @@ Fujiwara, et al.          Expires May 20, 2017                 [Page 10]
 
 Internet-Draft              NSEC/NSEC3 usage               November 2016
 
+
+   o  Fixup of the "validation required" in security considerations.
+
+   -02 to -03:
 
    o  Integrated a bunch of comments from Matthijs Mekking - details in:
       https://github.com/wkumari/draft-ietf-dnsop-nsec-aggressiveuse/
@@ -609,16 +613,16 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    o  Added a section "Updates to RFC 4035"
 
-   o  Some language clarification / typo / cleanup
-
-   o  Cleaned up the TTL section a bit.
-
 
 
 Fujiwara, et al.          Expires May 20, 2017                 [Page 11]
 
 Internet-Draft              NSEC/NSEC3 usage               November 2016
 
+
+   o  Some language clarification / typo / cleanup
+
+   o  Cleaned up the TTL section a bit.
 
    o  Removed Effects section, Additional proposal section, and pseudo
       code.
@@ -664,10 +668,6 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    o  Moved Aggressive Negative Caching Flag idea into Additional
       Proposals
-
-
-
-
 
 
 
@@ -791,13 +791,11 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
       the query as usual" means that the resolver must process the query
       as though it does not implement aggressive negative caching.
 
-Appendix B.  Procedure for determining ENT vs NXDOMAN
+Appendix B.  Procedure for determining ENT vs NXDOMAN with NSEC
 
-   Thanks to Mark Andrews for providing these helpful notes for
-   implementors.  As they are more general than for Aggressive NSEC we
-   have placed them in an appendix.  This procedure outlines how to
-   determine if a given name does not exist, or is an ENT (Empty Non-
-   Terminal, see [RFC5155] Section 1.3)
+   This procedure outlines how to determine if a given name does not
+   exist, or is an ENT (Empty Non-Terminal, see [RFC5155] Section 1.3)
+   with NSEC.
 
    If the NSEC record has not been verified as secure discard it.
 
@@ -831,6 +829,8 @@ Authors' Addresses
 
    Phone: +81 3 5215 8451
    Email: fujiwara@jprs.co.jp
+
+
 
 
 
