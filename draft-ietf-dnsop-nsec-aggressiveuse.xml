@@ -221,6 +221,10 @@ zucchini.example.org IN A 192.0.2.3]]></artwork>
       for the record). This document also specifies that a positive answer
       should be generated for any queries that the validating server receives
       that are proven to be covered by a wildcard record.</t>
+    </section>
+
+    <section anchor="aggressive-negative-caching"
+             title="Aggressive use of Cache">
 
       <t><xref target="RFC4035">Section 4.5 of</xref> says:</t>
 
@@ -239,31 +243,34 @@ zucchini.example.org IN A 192.0.2.3]]></artwork>
       Similarly, if the resolver is generating responses from a wildcard
       record, it will continue to do so (for the TTL).</t>
 
-      <t>We believe this recommendation can be relaxed because, in the absence
-      of this technique, a lookup for the exact name could have come in during
+      <t>This document relaxes this restriction, the paragraph from 
+      <xref target="RFC4035">Section 4.5 of</xref> is updated as follows:</t>
+
+      <figure>
+        <artwork><![CDATA[
++-----------------------------------------------------------------+
+|  Once the records are validated, DNSSEC enabled validating      |
+|  resolvers SHOULD use wildcards and NSEC/NSEC3 resource records |
+|  to generate positive and negative responses until the          |
+|  effective TTLs or signatures for those records expire.         |
++-----------------------------------------------------------------+
+]]></artwork>
+      </figure>
+
+      <t>
+      In other words, if the negative cache of the validating resolver has
+      sufficient information to validate the query, the resolver SHOULD use
+      NSEC, NSEC3 and wildcard records aggressively. Otherwise, it MUST fall
+      back to send the query to the authoritative DNS servers.</t>
+
+      <t>This recommendation can be relaxed because in the absence of this
+      technique, a lookup for the exact name could have come in during
       this interval, and so a negative answer could already be cached (see
       <xref target="RFC2308"/> for more background). This means that zone
       operators should have no expectation that an added name would work
       immediately. With DNSSEC and Aggressive NSEC, the TTL of the NSEC/NSEC3
       record and the SOA.MINIMUM field are the authoritative statement of how
       quickly a name can start working within a zone.</t>
-    </section>
-
-    <section anchor="aggressive-negative-caching"
-             title="Aggressive use of Cache">
-      <t>Section 4.5 of <xref target="RFC4035"/> says that "In theory, a
-      resolver could use wildcards or NSEC RRs to generate positive and
-      negative responses (respectively) until the TTL or signatures on the
-      records in question expire. However, it seems prudent for resolvers to
-      avoid blocking new authoritative data or synthesizing new data on their
-      own. Resolvers that follow this recommendation will have a more
-      consistent view of the namespace". This document relaxes this this
-      restriction, see Section 7 for more detail.</t>
-
-      <t>If the negative cache of the validating resolver has sufficient
-      information to validate the query, the resolver SHOULD use NSEC, NSEC3
-      and wildcard records aggressively. Otherwise, it MUST fall back to send
-      the query to the authoritative DNS servers.</t>
 
       <section anchor="nsec" title="NSEC">
         <t>The validating resolver needs to check the existence of an NSEC RR
@@ -373,29 +380,6 @@ zucchini.example.org IN A 192.0.2.3]]></artwork>
 
       <t>As these benefits are only accrued by those using DNSSEC, it is hoped
       that these techniques will lead to more DNSSEC deployment.</t>
-    </section>
-
-    <section anchor="update" title="Update to RFC 4035">
-      <t>Section 4.5 of <xref target="RFC4035"/> shows that "In theory, a
-      resolver could use wildcards or NSEC RRs to generate positive and
-      negative responses (respectively) until the TTL or signatures on the
-      records in question expire. However, it seems prudent for resolvers to
-      avoid blocking new authoritative data or synthesizing new data on their
-      own. Resolvers that follow this recommendation will have a more
-      consistent view of the namespace".</t>
-
-      <t>The paragraph is updated as follows:</t>
-
-      <figure>
-        <artwork><![CDATA[
-+-----------------------------------------------------------------+
-|  Once the records are validated, DNSSEC enabled validating      |
-|  resolvers SHOULD use wildcards and NSEC/NSEC3 resource records |
-|  to generate positive and negative responses until the          |
-|  effective TTLs or signatures for those records expire.         |
-+-----------------------------------------------------------------+
-]]></artwork>
-      </figure>
     </section>
 
     <section anchor="ianacons" title="IANA Considerations">
