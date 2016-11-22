@@ -454,9 +454,7 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    It is also suggested to limit the maximum TTL value of NSEC / NSEC3
    resource records in the negative cache to, for example, 10800 seconds
-   (3hrs), to mitigate this issue.  Implementations which comply with
-   this proposal are recommended to have a configurable maximum value of
-   NSEC RRs in the negative cache.
+   (3hrs), to mitigate this issue.
 
    Although the TTL of NSEC/NSEC3 records is typically fairly short
    (minutes or hours), their RRSIG expiration time can be much further
@@ -501,14 +499,14 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    o  There were some bits which mentioned "negative" in the title.
 
+   o  We had the cut-and-paste of what changed in 4035 twice.
+
 
 
 Fujiwara, et al.          Expires May 20, 2017                  [Page 9]
 
 Internet-Draft              NSEC/NSEC3 usage               November 2016
 
-
-   o  We had the cut-and-paste of what changed in 4035 twice.
 
    -04 to -05:
 
@@ -556,6 +554,8 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    o  Fixup of the "validation required" in security considerations.
 
+   -02 to -03:
+
 
 
 
@@ -563,8 +563,6 @@ Fujiwara, et al.          Expires May 20, 2017                 [Page 10]
 
 Internet-Draft              NSEC/NSEC3 usage               November 2016
 
-
-   -02 to -03:
 
    o  Integrated a bunch of comments from Matthijs Mekking - details in:
       https://github.com/wkumari/draft-ietf-dnsop-nsec-aggressiveuse/
@@ -613,14 +611,14 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    o  Some language clarification / typo / cleanup
 
+   o  Cleaned up the TTL section a bit.
+
 
 
 Fujiwara, et al.          Expires May 20, 2017                 [Page 11]
 
 Internet-Draft              NSEC/NSEC3 usage               November 2016
 
-
-   o  Cleaned up the TTL section a bit.
 
    o  Removed Effects section, Additional proposal section, and pseudo
       code.
@@ -666,6 +664,8 @@ Internet-Draft              NSEC/NSEC3 usage               November 2016
 
    o  Moved Aggressive Negative Caching Flag idea into Additional
       Proposals
+
+
 
 
 
